@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Compare textbook costs and alternatives before deciding what to buy.">
+  <title>Should I Buy This Textbook?</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="site-header">
+    <div class="brand" aria-label="Textbook Check home">
+      <span class="brand-icon" aria-hidden="true">✓</span>
+      <span>Textbook Check</span>
+    </div>
+    <a class="header-link" href="#how-it-works">How it works</a>
+  </header>
+
+  <main id="main" class="page-wrap">
+    <section class="hero" aria-labelledby="page-title">
+      <p class="eyebrow">A smarter student decision</p>
+      <h1 id="page-title">Should I buy this <span>textbook?</span></h1>
+      <p class="hero-copy">Make a more informed choice before spending your money. Compare the book's importance, how often you'll use it, and the alternatives available to you.</p>
+    </section>
+
+    <div class="content-grid">
+      <section class="panel assessment-panel" aria-labelledby="assessment-title">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Your assessment</p>
+            <h2 id="assessment-title">Tell us about the book</h2>
+          </div>
+          <span class="step-pill">Step 1 of 1</span>
+        </div>
+        <form id="textbook-form" novalidate>
+          <div class="field">
+            <label for="book-title">Textbook title <span class="optional">(optional)</span></label>
+            <input id="book-title" name="bookTitle" type="text" maxlength="100" placeholder="e.g. Introduction to Programming">
+          </div>
+
+          <div class="field">
+            <label for="new-price">Price of a new copy (R) <span aria-hidden="true">*</span></label>
+            <input id="new-price" name="newPrice" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="e.g. 850" required aria-describedby="price-help new-price-error">
+            <small id="price-help" class="hint">Enter the price in South African rand.</small>
+            <small id="new-price-error" class="error-message" hidden></small>
+          </div>
+
+          <fieldset class="field">
+            <legend>Is the textbook required for your course? <span aria-hidden="true">*</span></legend>
+            <label class="choice"><input type="radio" name="required" value="required" required> Yes, it is required</label>
+            <label class="choice"><input type="radio" name="required" value="recommended"> It is recommended</label>
+            <label class="choice"><input type="radio" name="required" value="no"> No, it is optional</label>
+            <small id="required-error" class="error-message" hidden></small>
+          </fieldset>
+
+          <div class="field">
+            <label for="frequency">How often do you expect to use it? <span aria-hidden="true">*</span></label>
+            <select id="frequency" name="frequency" required>
+              <option value="">Choose one</option>
+              <option value="often">Every week</option>
+              <option value="sometimes">A few times during the semester</option>
+              <option value="rarely">Rarely</option>
+            </select>
+            <small id="frequency-error" class="error-message" hidden></small>
+          </div>
+
+          <div class="field">
+            <label for="secondhand-price">Second-hand price (R) <span class="optional">(if available)</span></label>
+            <input id="secondhand-price" name="secondhandPrice" type="number" min="0" step="0.01" inputmode="decimal" placeholder="e.g. 450">
+            <small id="secondhand-error" class="error-message" hidden></small>
+          </div>
+
+          <fieldset class="field">
+            <legend>Are any of these alternatives available?</legend>
+            <label class="choice"><input type="checkbox" name="alternatives" value="library"> Library copy</label>
+            <label class="choice"><input type="checkbox" name="alternatives" value="digital"> Digital version</label>
+            <label class="choice"><input type="checkbox" name="alternatives" value="rental"> Rental option</label>
+          </fieldset>
+
+          <button class="primary-button" type="submit">Check my decision <span aria-hidden="true">→</span></button>
+          <p class="privacy-note">Your answers are used in this page to generate a recommendation. This prototype does not send your information to a server.</p>
+        </form>
+      </section>
+
+      <aside class="panel result-panel" aria-labelledby="result-title">
+        <p class="eyebrow">Your result</p>
+        <div id="empty-result" class="empty-state">
+          <div class="empty-icon" aria-hidden="true">↗</div>
+          <h2 id="result-title">Your recommendation will appear here</h2>
+          <p>Complete the form to see a recommendation based on your answers and available alternatives.</p>
+          <div class="mini-checklist">
+            <span aria-hidden="true">✓</span> Compare the cost
+            <span aria-hidden="true">✓</span> Consider how often you'll use it
+            <span aria-hidden="true">✓</span> Check cheaper options
+          </div>
+        </div>
+        <div id="result-content" hidden aria-live="polite" aria-atomic="true">
+          <p id="result-label" class="result-label"></p>
+          <h2 id="result-heading"></h2>
+          <p id="result-explanation" class="result-explanation"></p>
+          <div id="saving-card" class="saving-card" hidden>
+            <span class="saving-caption">Potential saving compared with new</span>
+            <strong id="saving-amount"></strong>
+          </div>
+          <h3>What you could do next</h3>
+          <ul id="next-steps" class="next-steps"></ul>
+          <p class="disclaimer">This is a guide, not a guarantee. Check your lecturer's requirements and compare the condition and edition before buying.</p>
+          <div class="result-actions">
+            <button type="button" id="share-button" class="secondary-button">Share result</button>
+            <button type="button" id="reset-button" class="text-button">Start again</button>
+          </div>
+          <p id="share-status" class="status-message" role="status" hidden></p>
+        </div>
+      </aside>
+    </div>
+
+    <section id="how-it-works" class="info-section" aria-labelledby="how-title">
+      <p class="eyebrow">Simple by design</p>
+      <h2 id="how-title">How it works</h2>
+      <div class="info-cards">
+        <article class="info-card"><span class="card-number">01</span><h3>Enter the details</h3><p>Tell us the price, course requirement and how often you expect to use the book.</p></article>
+        <article class="info-card"><span class="card-number">02</span><h3>Compare options</h3><p>Include second-hand prices and alternatives such as the library or a digital copy.</p></article>
+        <article class="info-card"><span class="card-number">03</span><h3>Review the result</h3><p>Read the recommendation and its explanation before making your own decision.</p></article>
+      </div>
+    </section>
+
+    <section class="panel review-panel" aria-labelledby="review-title">
+      <p class="eyebrow">Student voices</p>
+      <h2 id="review-title">Share a textbook tip</h2>
+      <p class="section-intro">Add a short tip that may help another student. In this prototype, tips appear only in this browser session and are not uploaded.</p>
+      <form id="review-form" class="review-form" novalidate>
+        <div class="field">
+          <label for="review-book">Textbook or subject</label>
+          <input id="review-book" name="reviewBook" maxlength="80" required placeholder="e.g. Database Systems">
+          <small id="review-book-error" class="error-message" hidden></small>
+        </div>
+        <div class="field">
+          <label for="review-text">Your tip</label>
+          <textarea id="review-text" name="reviewText" maxlength="300" rows="3" required placeholder="Was it useful? Is there a cheaper option?"></textarea>
+          <small id="review-text-error" class="error-message" hidden></small>
+        </div>
+        <button class="secondary-button" type="submit">Add tip</button>
+      </form>
+      <div id="reviews-list" class="reviews-list" aria-live="polite">
+        <p class="empty-review">No tips yet. Be the first to share one.</p>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <p>Textbook Check · Student decision-support prototype</p>
+      <p>Designed to help you compare options — the final decision is yours.</p>
+    </footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
